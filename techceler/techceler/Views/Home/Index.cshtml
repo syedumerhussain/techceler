@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<br />
+<h2>Techceler Project</h2>
+<br />
+<h3>There are 39 Time zones in the world</h3>
+<br />
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<link href="~/Scripts/bootstrap.min.css" rel="stylesheet" />
+<input type="text" name="texttime" id="time" value=""/>
+<input type="button" class="btn btn-primary" name="btntime" id="btn1" value=" Get Time By ID"/>
+<input type="button" class="btn btn-primary" name="btnitems" id="btn2" value=" Get All Country Time Zones" />
+<br /><br />
+<ul id="timedata"> </ul>
+<script>
+    $(document).ready(function () {
+        $("#btn2").click(function () {
+
+            $("#timedata").empty();
+            $.getJSON("/api/Web", function (data) {
+
+                $.each(data, function (key, val) {
+                    $("<li>" + val + "</li>").appendTo($("#timedata"));
+
+
+
+                })
+            })
+
+
+        })
+
+        $("#btn1").click(function () {
+            var id = $("#time").val();
+            $.getJSON("/api/Web/" + id, function (data) {
+
+                alert(data);
+            })
+
+
+        })
+    })
+
+</script>
